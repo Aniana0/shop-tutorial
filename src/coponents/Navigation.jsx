@@ -1,8 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { styled } from 'styled-components'
+import { login, logout, onUserState } from '../api/firebase';
+import UserData from './UserData';
+import { useAuthContext } from '../context/AuthContext';
 
 function Navigation() {
+  // const [user, setUser] = useState();
+
+  // useEffect(()=>{
+  //   onUserState((user)=>{
+  //     setUser(user);
+  //   })
+  // },[])
+  
+  // useEffect(()=>{
+  //   onUserState(setUser);
+  // }, [])
+
+  // const userLogin = ()=>{
+  //   login().then(setUser);
+  // };
+  // const userLogout = ()=>{
+  //   logout().then(setUser);
+  // };
+  const { user, login, logout } = useAuthContext();
   return (
     <HeaderContainer>
       <Link to="/">
@@ -19,8 +41,14 @@ function Navigation() {
       </nav>
 
       <div className="userWrap">
-        <button className='loginBtn'>Login</button>
-        <button className='logoutBtn'>Logout</button>
+        {user && user.isAdmin && (
+          <Link className="addNew" to='/products/new'>
+            상품등록
+          </Link>
+        )}
+        {user && <UserData user={user}/>}
+        {!user && <button className='loginBtn' onClick={login}>Login</button>}
+        {user && <button className='logoutBtn' onClick={logout}>Logout</button>}
       </div>
     </HeaderContainer>
   )
@@ -33,7 +61,7 @@ const HeaderContainer = styled.div`
   gap : 24px;
   a{
     text-decoration : none;
-    color: #333;
+    color: #0c871f;
     h1{
       font-size: 30px
     }
@@ -54,12 +82,31 @@ const HeaderContainer = styled.div`
       border: none;
       padding: 6px 12px;
       border-radius: 6px;
+      cursor: pointer;
     }
     .loginBtn{
-      background: lightblue;
+      background: #2fb843;
+      color: white;
     }
     .logoutBtn{
-      background: lightgrey;
+      background: #cfc3b6;
+      color: #403d39
+    }
+    .logoutBtn:hover{
+      background: #c0ad9b;
+    }
+    .loginBtn:hover{
+      background: #0c871f;
+    }
+    .addNew{
+      background: #2fb843;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13.3333px;
+    }
+    .addNew:hover{
+      background: #0c871f;
     }
   }
 `
