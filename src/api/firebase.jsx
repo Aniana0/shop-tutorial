@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
-import { ref, get, getDatabase } from 'firebase/database';
+import { ref, get, getDatabase, set } from 'firebase/database';
+import { v4 as uuid } from 'uuid' // 고유 식별자 생성 패키지
 
 const firebaseConfig = {
     apiKey : process.env.REACT_APP_FIREBASE_API_KEY,
@@ -76,4 +77,15 @@ async function adminUser(user){
     }catch(err){
         console.log(err)
     }
+}
+
+
+// 파이어 베이스에 상품 정보 연동하기
+export async function addProducts(product,img){
+    const id = uuid();
+    return set(ref(database, `products/${id}`),{
+        ...product,
+        id,
+        img
+    })
 }

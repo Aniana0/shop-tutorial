@@ -42,7 +42,7 @@ function Navigation() {
 
       <div className="userWrap">
         {user && user.isAdmin && (
-          <Link className="addNew" to='/products/new'>
+          <Link className="addNew" to='/products/add'>
             상품등록
           </Link>
         )}

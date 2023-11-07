@@ -5,10 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Navigate, Router, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom';
 import AllProducts from './pages/AllProducts';
-import NewProducts from './pages/NewProducts';
+import AddProducts from './pages/AddProducts';
 import NotFound from './pages/NotFound';
 import MyCart from './pages/MyCart';
 import { useAuthContext } from './context/AuthContext';
+import NewProducts from './pages/NewProducts';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -33,9 +34,13 @@ const routes = createBrowserRouter([
       },
       {
         path: "/products/new",
+        element:<NewProducts />
+      },
+      {
+        path: "/products/add",
         element:
           <ProtectRoute checkAdmin>
-            <NewProducts />
+            <AddProducts />
           </ProtectRoute>
       },
       {
