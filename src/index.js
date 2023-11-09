@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound';
 import MyCart from './pages/MyCart';
 import { useAuthContext } from './context/AuthContext';
 import NewProducts from './pages/NewProducts';
+import ProductDetails from './pages/ProductDetails';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -46,6 +47,10 @@ const routes = createBrowserRouter([
       {
         path: "/cart",
         element: <MyCart />
+      },
+      {
+        path: "/products/detail/:id",
+        element: <ProductDetails />
       }
     ]
   }

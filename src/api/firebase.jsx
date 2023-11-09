@@ -16,7 +16,6 @@ const firebaseConfig = {
     .env는 process에서 사용할 수 있는 모든 환경 변수를 포함하는 객체
     */   
 };
-console.log(process.env.REACT_APP_FIREBASE_DATABASE_URL)
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider(); // 구글 로그인 세팅
 const auth = getAuth();
@@ -30,7 +29,6 @@ export async function login(){
     try{
         const result = await signInWithPopup(auth, provider);
         const user = result.user;
-        console.log(user)
         return user;
     }catch(err){
         console.log(err)
@@ -86,6 +84,24 @@ export async function addProducts(product,img){
     return set(ref(database, `products/${id}`),{
         ...product,
         id,
-        img
+        img,
     })
 }
+
+// 가져오기
+export async function getProducts(){
+    return get(ref(database, 'products')).then((snapshot)=>{
+        if(snapshot.exists()){
+            return Object.values(snapshot.val())
+        }else{
+            return []
+        }
+    })
+}
+
+// async : 비동기 방식의 데이터 처리방법 (promise 이후 나온 거, 최신)
+// 실시간 데이터 베이스의 노드와 함께 생성하고, 읽기 작업을 시작하면 호출받은 정보값을 반환
+// .then((snapshot)) snapshot = 내가 참조하고 있는 노드
+// snapshot이라는 변수명을 사용하는 이유는 그냥 약속임
+//  특정 순간 저장용
+// .exist() - 스냅샷에 노드 데이터가 있는지 확인
