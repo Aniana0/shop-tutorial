@@ -41,6 +41,7 @@ function Navigation() {
       </nav>
 
       <div className="userWrap">
+        <Link to={'/cart'}>장바구니</Link>
         {user && user.isAdmin && (
           <Link className="addNew" to='/products/add'>
             상품등록

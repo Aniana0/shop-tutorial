@@ -68,5 +68,79 @@ img{
       flex-basis: 30%;
    }
 }
+
+.detailPage{
+   max-width: 1024px;
+   display: flex;
+   gap: 40px;
+   margin: 0px auto;
+   .detailImg{
+      max-width: 400px;
+      img{
+         object-fit: cover;
+         display: block;
+      }
+   }
+   .detailText{
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      h2{
+         width: 100%;
+         font-size: 24px;
+         font-weight: normal;
+         border-bottom: solid 1px #2fb843;
+         padding-bottom: 16px;
+         color: #0c871f;
+      }
+      p{
+         width: 100%;
+         padding-bottom: 16px;
+         color: rgba(0,0,0,0.7);
+         display: flex;
+         font-size: 20px;
+         span{
+            padding-left: 80px;
+         }
+      }
+      .detailOpt{
+         width: 100%;
+         display: flex;
+         align-items: center;
+         margin-bottom: 16px;
+         label{
+            font-size: 20px;
+            color: rgba(0,0,0,0.7);
+         }
+         select{
+            margin-left: 80px;
+            width: 200px;
+            padding: 6px 12px;
+            border: 1px solid #2fb843;
+            border-radius: 0px;
+         }
+      }
+      .detailBtns{
+         display: flex;
+         gap: 16px;
+         margin-top: auto;
+         flex-direction: column;
+         button{
+            width: 100%;
+            height: 50px;
+            border-radius: 5px;
+            border: none;
+         }
+         .cartBtn{
+            background-color: #2fb843;
+            color: white;
+         }
+         .buyBtn{
+            background-color : #dac379;
+         }
+      }
+   }
+}
 `
 export default GlobalStyle;

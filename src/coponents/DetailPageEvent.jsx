@@ -14,7 +14,8 @@ export default function DetailPageEvent({product}) {
         price: product.price,
         option: product.option,
         category: product.category,
-        description: product.description
+        description: product.description,
+        title : product.title
       }
     });
   };

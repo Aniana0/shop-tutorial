@@ -85,6 +85,9 @@ export async function addProducts(product,img){
         ...product,
         id,
         img,
+        option : product.option.split(",").map(option=>option.trim()).join(", "),
+        price : parseInt(product.price)
+        // join : 단일 문자로 다시 결합
     })
 }
 
@@ -105,3 +108,27 @@ export async function getProducts(){
 // snapshot이라는 변수명을 사용하는 이유는 그냥 약속임
 //  특정 순간 저장용
 // .exist() - 스냅샷에 노드 데이터가 있는지 확인
+
+// 장바구니 저장 요소 업뎃
+export async function updateCart(userId, product){
+    try{
+        const cartRef = ref(database, `cart/${userId}/${product.id}`);
+        await set(cartRef, product);
+    }catch(err){
+        console.error(err);
+    }
+};
+
+export async function getCart(userId){
+    try{
+        const snapshot = await(get(ref(database,`cart/${userId}`)));
+        if(snapshot.exists()){
+            const item = snapshot.val();
+            return Object.values(item);
+        }else{
+            return [];
+        }
+    }catch(err){
+        console.error(err);
+    }
+}
