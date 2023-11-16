@@ -4,6 +4,7 @@ import { styled } from 'styled-components'
 import { login, logout, onUserState } from '../api/firebase';
 import UserData from './UserData';
 import { useAuthContext } from '../context/AuthContext';
+import CategoryList from './CategoryList';
 
 function Navigation() {
   // const [user, setUser] = useState();
@@ -32,9 +33,7 @@ function Navigation() {
       </Link>
 
       <nav>
-        <Link to="/products/new">
-          신상품
-        </Link>
+        <CategoryList/>
         <Link to="/products">
           모든 상품
         </Link>
@@ -58,7 +57,7 @@ function Navigation() {
 const HeaderContainer = styled.div`
   display : flex;
   align-items : center;
-  padding : 12px;
+  padding : 24px;
   gap : 24px;
   a{
     text-decoration : none;

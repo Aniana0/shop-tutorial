@@ -66,6 +66,18 @@ img{
    li{
       flex-shrink: 0;
       flex-basis: 30%;
+      .imgWrap{
+         position: relative;
+         width: 100%;
+         padding-top: 100%;
+         img{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            top: 0;
+         }
+      }
    }
 }
 
@@ -139,6 +151,41 @@ img{
          .buyBtn{
             background-color : #dac379;
          }
+      }
+   }
+}
+.cartList{
+   display: flex;
+   flex-direction: column;
+   border-top: solid 1px rgba(0,0,0,0.3);
+   margin: 24px 0px;
+   li{
+      display: flex;
+      align-items:center;
+      justify-content: space-between;
+      border-bottom: solid 1px rgba(0,0,0,0.3);
+      padding: 12px 0px;
+      div{
+         gap: 12px;
+         align-items: center;
+         display: flex;
+         &.textWrap{
+            flex-basis: 70%;
+         }
+         &.quantityWrap{
+            flex-basis: 20%;
+            p{
+               width: 100%;
+               text-align: right;
+            }
+            
+         }
+      }
+      img{
+         width: 100px;
+         height: 100px;
+         object-fit: cover;
+         display: block;
       }
    }
 }

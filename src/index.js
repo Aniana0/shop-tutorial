@@ -11,6 +11,7 @@ import MyCart from './pages/MyCart';
 import { useAuthContext } from './context/AuthContext';
 import NewProducts from './pages/NewProducts';
 import ProductDetails from './pages/ProductDetails';
+import CategoryPage from './coponents/CategoryPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -51,6 +52,10 @@ const routes = createBrowserRouter([
       {
         path: "/products/detail/:id",
         element: <ProductDetails />
+      },
+      {
+        path: "/products/:category",
+        element: <CategoryPage />
       }
     ]
   }

@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
-import { ref, get, getDatabase, set } from 'firebase/database';
+import { ref, get, getDatabase, set, remove } from 'firebase/database';
 import { v4 as uuid } from 'uuid' // 고유 식별자 생성 패키지
 
 const firebaseConfig = {
@@ -131,4 +131,38 @@ export async function getCart(userId){
     }catch(err){
         console.error(err);
     }
+}
+
+export async function deleteCart(userId, productId){
+    console.log(userId, productId)
+    return remove(ref(database, `cart/${userId}/${productId}`))
+}
+
+// DB에 등록한 상품 카테고리 불러오기
+export async function getCategory(){
+    const database = getDatabase();
+    const categoryRef = ref(database, 'products');
+    try{
+        const snapshot = await get(categoryRef);
+        if(snapshot.exists()){
+            return Object.values(snapshot.val());
+        }else{
+            return []
+        }
+    }catch(error){
+        console.error(error);
+    }
+};
+
+// 데이터 베이스 카테고리 필터 -> 분류 출력
+export async function getCategoryFilter(category){
+    return get(ref(database, `products`)).then(snapshot=>{
+        if(snapshot.exists()){
+            const allProducts = Object.values(snapshot.val()); // 일단 모두 가져오기
+            const filterProduct = allProducts.filter(product => product.category === category);
+            return filterProduct;
+        }else{
+            return []
+        }
+    })
 }

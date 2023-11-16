@@ -21,7 +21,9 @@ export default function DetailPageEvent({product}) {
   };
   return (
     <div onClick={detail}>
-      <img src={product.img} alt={product.title} />
+      <div className="imgWrap">
+        <img src={product.img} alt={product.title} />
+      </div>
       <div className="textWrap">
         <h3 className='itemTitle'>{product.title}</h3>
         <div className="itemFlex">
