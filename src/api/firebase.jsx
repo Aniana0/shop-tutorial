@@ -1,7 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 import { ref, get, getDatabase, set, remove } from 'firebase/database';
-import { v4 as uuid } from 'uuid' // 고유 식별자 생성 패키지
+import {getDownloadURL, getStorage, ref as storageRef} from 'firebase/storage'
+import { v4 as uuid } from 'uuid'; // 고유 식별자 생성 패키지
 
 const firebaseConfig = {
     apiKey : process.env.REACT_APP_FIREBASE_API_KEY,
@@ -20,7 +21,7 @@ const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider(); // 구글 로그인 세팅
 const auth = getAuth();
 const database = getDatabase(app);
-
+const storage = getStorage();
 
 provider.setCustomParameters({
     prompt : 'select_account'
@@ -166,3 +167,43 @@ export async function getCategoryFilter(category){
         }
     })
 }
+
+// 상품 검색
+export async function searchProduct(query){
+    try{
+        const dbRef = ref(database, 'products');
+        const snapshot = await get(dbRef);
+
+        if(snapshot.exists()){
+            const data = snapshot.val();
+            const allProducts = Object.values(data);
+
+            if(allProducts.length === 0){
+                return []
+            }else{
+                const matchItems = allProducts.filter(product => {
+                    const itemTitle = product.title.toLowerCase(); // 받아온 문자열을 소문자로
+                    return itemTitle.includes(query.toLowerCase());
+                })
+                return matchItems;
+            }
+        }else{
+            return []
+        }
+    }catch(error){
+        console.error(error);
+    }
+};
+
+// 스토리지 이미지 가져오기
+export async function getStorageImg(imgPath){
+    try{
+        const imgRef = storageRef(storage, imgPath);
+        const downloadURL = await getDownloadURL(imgRef);
+        return downloadURL;
+    }catch(error){
+        console.error(error);
+    }
+}
+
+export {storage}

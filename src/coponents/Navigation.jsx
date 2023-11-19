@@ -40,6 +40,7 @@ function Navigation() {
       </nav>
 
       <div className="userWrap">
+        <Link to={`/search`}>검색</Link>
         <Link to={'/cart'}>장바구니</Link>
         {user && user.isAdmin && (
           <Link className="addNew" to='/products/add'>

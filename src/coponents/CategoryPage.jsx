@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { getCategoryFilter } from '../api/firebase';
 import CategoryProductList from './CategoryProductList';
+import SlideItem from './SlideItem';
 
 export default function CategoryPage() {
   const [ products, setProducts ] = useState([]);
@@ -12,6 +13,7 @@ export default function CategoryPage() {
   }, [category])
   return (
     <div>
+      <SlideItem/>
       <CategoryProductList category={category} product={products}/>
     </div>
   )

@@ -12,6 +12,7 @@ import { useAuthContext } from './context/AuthContext';
 import NewProducts from './pages/NewProducts';
 import ProductDetails from './pages/ProductDetails';
 import CategoryPage from './coponents/CategoryPage';
+import Search from './pages/Search';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -56,6 +57,10 @@ const routes = createBrowserRouter([
       {
         path: "/products/:category",
         element: <CategoryPage />
+      },
+      {
+        path: "/search",
+        element: <Search />
       }
     ]
   }

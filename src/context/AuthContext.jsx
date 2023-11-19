@@ -9,7 +9,6 @@ export function AuthContextProvider({children}){
 
     useEffect(()=>{
         const userChange = (newUser)=>{
-            console.log(newUser);
             setUser(newUser);
         };
         const unSubscribeFunc = onUserState(userChange);

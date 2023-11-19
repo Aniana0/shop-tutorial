@@ -189,5 +189,34 @@ img{
       }
    }
 }
+.searchResultList{
+   display: flex;
+   gap: 12px;
+   flex-direction: column;
+   li{
+      >div{
+         display: flex;
+         gap: 30px;
+         align-items: center;
+         padding: 12px 0px;
+         border-bottom: solid 1px #ddd;
+      }
+   }
+   img{
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+   }
+}
+.searchForm{
+   width: 100%;
+   height: 50px;
+   margin-bottom: 50px;
+   background: white;
+   border: none;
+   font-size: 24px;
+   padding: 24px 16px;
+   box-sizing: border-box;
+}
 `
 export default GlobalStyle;
