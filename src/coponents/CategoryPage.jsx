@@ -13,7 +13,7 @@ export default function CategoryPage() {
   }, [category])
   return (
     <div>
-      <SlideItem/>
+      {/* <SlideItem/> */}
       <CategoryProductList category={category} product={products}/>
     </div>
   )

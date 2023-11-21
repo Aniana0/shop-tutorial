@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { GoogleAuthProvider, getAuth, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { ref, get, getDatabase, set, remove } from 'firebase/database';
 import {getDownloadURL, getStorage, ref as storageRef} from 'firebase/storage'
 import { v4 as uuid } from 'uuid'; // 고유 식별자 생성 패키지
@@ -203,6 +203,29 @@ export async function getStorageImg(imgPath){
         return downloadURL;
     }catch(error){
         console.error(error);
+    }
+}
+
+
+
+//이메일 회원가입 저장
+export async function joinEmail(email, password){
+    try{
+        const userCredit = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredit.user;
+        return user;
+    }catch(err){
+        console.error(err);
+    }
+}
+
+
+export async function loginEmail(email, password){
+    try{
+        const userCredit = await signInWithEmailAndPassword(auth, email, password);
+        return userCredit.user;
+    }catch(err){
+        console.error(err);
     }
 }
 

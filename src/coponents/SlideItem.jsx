@@ -48,7 +48,9 @@ export default function SlideItem() {
         effect='fade'
       >
         {imgURL.map((el,index)=>(
-          <SwiperSlide key={index} style={{background:`url(${el}) no-repeat center center / cover`}}></SwiperSlide>
+          <SwiperSlide key={index} style={{background:`url(${el}) no-repeat center center / cover`}}>
+            <img src={el} alt="" />
+          </SwiperSlide>
         ))}
       </Swiper>
     </>

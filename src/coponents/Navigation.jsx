@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { styled } from 'styled-components'
 import { login, logout, onUserState } from '../api/firebase';
 import UserData from './UserData';
@@ -7,13 +7,14 @@ import { useAuthContext } from '../context/AuthContext';
 import CategoryList from './CategoryList';
 
 function Navigation() {
-  // const [user, setUser] = useState();
+  const [user, setUser] = useState();
+  const navigate = useNavigate();
 
-  // useEffect(()=>{
-  //   onUserState((user)=>{
-  //     setUser(user);
-  //   })
-  // },[])
+  useEffect(()=>{
+    onUserState((user)=>{
+      setUser(user);
+    })
+  },[])
   
   // useEffect(()=>{
   //   onUserState(setUser);
@@ -22,10 +23,10 @@ function Navigation() {
   // const userLogin = ()=>{
   //   login().then(setUser);
   // };
-  // const userLogout = ()=>{
-  //   logout().then(setUser);
-  // };
-  const { user, login, logout } = useAuthContext();
+
+  const userLogout = ()=>{
+    logout().then(setUser);
+  };
   return (
     <HeaderContainer>
       <Link to="/">
@@ -47,9 +48,18 @@ function Navigation() {
             상품등록
           </Link>
         )}
-        {user && <UserData user={user}/>}
-        {!user && <button className='loginBtn' onClick={login}>Login</button>}
-        {user && <button className='logoutBtn' onClick={logout}>Logout</button>}
+        {/* {user && <UserData user={user}/>} */}
+        {/* {!user && <button className='loginBtn' onClick={login}>Login</button>} */}
+        {/* {user && <button className='logoutBtn' onClick={logout}>Logout</button>} */}
+        {/* <Link to='/login'>로그인</Link> */}
+        {user ? (
+          <>
+            {user && <UserData user={user}/>}
+            <button className='logoutBtn' onClick={userLogout}>Logout</button>
+          </>
+        ):(
+          <Link to='/login'>로그인</Link>
+        )}
       </div>
     </HeaderContainer>
   )

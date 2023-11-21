@@ -13,6 +13,8 @@ import NewProducts from './pages/NewProducts';
 import ProductDetails from './pages/ProductDetails';
 import CategoryPage from './coponents/CategoryPage';
 import Search from './pages/Search';
+import Login from './pages/Login';
+import Join from './pages/Join';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -61,6 +63,14 @@ const routes = createBrowserRouter([
       {
         path: "/search",
         element: <Search />
+      },
+      {
+        path: "/login",
+        element: <Login />
+      },
+      {
+        path: "/join",
+        element: <Join />
       }
     ]
   }
