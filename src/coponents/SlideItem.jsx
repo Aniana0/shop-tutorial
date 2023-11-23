@@ -8,31 +8,29 @@ import { useState } from 'react';
 import { getStorageImg, storage } from '../api/firebase';
 
 
-export default function SlideItem() {
+export default function SlideItem({imgs}) {
   const slider = {
-    width: '600px',
-    height: '500px'
+    width: '100%',
+    height: '600px',
+    marginBottom : "24px"
   }
-  // const sliderImg = [
-  //   "http://res.cloudinary.com/dwagajimv/image/upload/s--Lfzt8I_J--/v1699498279/qkkqjhbypd3lv3va83db.jpg",
-  //   "http://res.cloudinary.com/dwagajimv/image/upload/s--MDhD6U1F--/v1699499348/y7coha9shpq6gzc8ksit.jpg",
-  //   "http://res.cloudinary.com/dwagajimv/image/upload/s--MIqZnB40--/v1699498626/wrj2fbazqjl4bgk1rc4a.jpg",
-  //   "http://res.cloudinary.com/dwagajimv/image/upload/s--tTDrEnL0--/v1699498393/fcbkehotl8kqfouixl4b.jpg"
-  // ]
+
   const [imgURL, setImgURL] = useState([]);
+
   useEffect(()=>{
-    async function loadImg(){
+    const loadImg = async ()=>{
       try{
         const urls = await Promise.all(
-          imgURL.map(imgPath=>getStorageImg(imgPath, storage))
-        )
-        setImgURL(urls)
+          imgs.map((imgPath)=>getStorageImg(imgPath))
+        );
+        setImgURL(urls);
       }catch(err){
         console.error(err);
       }
     }
     loadImg();
-  }, [imgURL])
+  }, [imgs])
+
   return (
     <>
       {/* 스와이퍼 컨테이너 */}
@@ -48,9 +46,7 @@ export default function SlideItem() {
         effect='fade'
       >
         {imgURL.map((el,index)=>(
-          <SwiperSlide key={index} style={{background:`url(${el}) no-repeat center center / cover`}}>
-            <img src={el} alt="" />
-          </SwiperSlide>
+          <SwiperSlide key={index} style={{background:`url(${el}) no-repeat center center / cover`}}></SwiperSlide>
         ))}
       </Swiper>
     </>

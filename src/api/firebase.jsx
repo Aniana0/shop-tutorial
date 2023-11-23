@@ -8,7 +8,8 @@ const firebaseConfig = {
     apiKey : process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain : process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
     projectId : process.env.REACT_APP_FIREBASE_PROJECT_ID,
-    databaseURL : process.env.REACT_APP_FIREBASE_DATABASE_URL
+    databaseURL : process.env.REACT_APP_FIREBASE_DATABASE_URL,
+    storageBucket : process.env.REACT_APP_FIREBASE_STORAGE_BUKET
     // process.env -> node.js의 (전역개체)환경변수
     /*
     환경 변수 : 실행중인 프로세스에 사용할 수 있고, 애플리케이션을 구현할 수 있는 키-값으로 이루어진 변수
@@ -21,7 +22,9 @@ const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider(); // 구글 로그인 세팅
 const auth = getAuth();
 const database = getDatabase(app);
-const storage = getStorage();
+const storage = getStorage(app);
+
+export {storage};
 
 provider.setCustomParameters({
     prompt : 'select_account'
@@ -228,5 +231,3 @@ export async function loginEmail(email, password){
         console.error(err);
     }
 }
-
-export {storage}

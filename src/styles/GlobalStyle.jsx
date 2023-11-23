@@ -58,24 +58,39 @@ img{
 .container{
     max-width: 1280px;
     margin: 0px auto;
+    padding: 100px 0px
 }
 .productsList{
    display: flex;
-   gap: 24px 5%;
+   gap: 24px 2%;
    flex-wrap: wrap;
    li{
       flex-shrink: 0;
-      flex-basis: 30%;
+      flex-basis: 32%;
       .imgWrap{
          position: relative;
          width: 100%;
          padding-top: 100%;
+         margin-bottom: 12px;
          img{
             position: absolute;
             width: 100%;
             height: 100%;
             object-fit: cover;
             top: 0;
+         }
+      }
+      .textWrap{
+         display: flex;
+         flex-direction: column;
+         gap: 8px;
+         .itemTitle{
+            color: #0c871f;
+            font-size: 20px;
+         }
+         .itemFlex{
+            display: flex;
+            justify-content: space-between;
          }
       }
    }

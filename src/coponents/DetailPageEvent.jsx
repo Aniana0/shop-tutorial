@@ -20,7 +20,7 @@ export default function DetailPageEvent({product}) {
     });
   };
   return (
-    <div onClick={detail}>
+    <div onClick={detail} className='productItem'>
       <div className="imgWrap">
         <img src={product.img} alt={product.title} />
       </div>
